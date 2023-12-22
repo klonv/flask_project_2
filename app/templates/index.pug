@@ -1,7 +1,7 @@
 extends base.pug
 
 block content
-  h1 Hello, {{ user.username }}!
+  h1 Hello, {{ current_user.username }}!
   for post in posts
     div 
       p {{ post.author.username }} says: 
