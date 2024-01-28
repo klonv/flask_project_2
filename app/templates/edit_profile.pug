@@ -1,0 +1,18 @@
+extends base.pug
+
+block content 
+  h1 Edit Profile 
+  form(action="" method="post")
+    {{ form.hidden_tag() }}
+    p 
+      {{ form.username.label }}
+      {{ form.username(size=32) }}
+      for error in form.username.errors
+        span(style="color: red;") [{{ error }}]
+    p 
+      {{ form.about_me.label }}
+      {{ form.about_me(coll=50, row=4) }}
+      for error in form.about_me.errors
+        span(style="color: red;") [{{ error }}]
+    p
+      {{ form.submit }}
