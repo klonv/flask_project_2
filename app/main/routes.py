@@ -6,8 +6,10 @@ from app import db
 from app.main.forms import EditProfileForm, EmptyForm, PostForm, SearchForm
 from app.main import bp
 from app.models import Post, User
+from app.translate import translate
 
 import sqlalchemy as sa
+from langdetect import detect, LangDetectException
 
 # ф-ция записи времени последнего посещения
 @bp.before_app_request
@@ -25,7 +27,11 @@ def before_request():
 def index():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(body=form.post.data, author=current_user)
+        try:
+            language = detect(form.post.data)
+        except LangDetectException:
+            language = ''
+        post = Post(body=form.post.data, author=current_user, language=language)
         db.session.add(post)
         db.session.commit()
         flash(_('your post is now live!'))
@@ -38,7 +44,7 @@ def index():
         if posts.has_next else None
     prev_url = url_for('main.index', page=posts.prev_num) \
         if posts.has_prev else None
-    return render_template('index.pug', title='Home', form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
+    return render_template('index.pug', title=_('Home'), form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
 
 
 # функция просмотра обзора
@@ -131,16 +137,23 @@ def unfollow(username):
         return redirect(url_for('main.index'))
     
 # форма поиска
-@bp.route('/search')
-@login_required
-def search():
-    if not g.search_form.validate():
-        return redirect(url_for('main.explore'))
-    page = request.args.get('page', 1, type=int)
-    posts, total = Post.search(g.search_form.q.data, page, current_app.config['POST_PER_PAGE'])
-    next_url = url_for('main.search', q=g.search_form.q.data, page=page + 1) \
-        if total > page * current_app.config['POST_PER_PAGE'] else None
-    prev_url = url_for('main.search', q=g.search_form.q.data, page=page - 1) \
-        if page > 1 else None
-    return render_template('search.pug', title='Search', posts=posts, next_url=next_url, prev_url=prev_url)
+# @bp.route('/search')
+# @login_required
+# def search():
+#     if not g.search_form.validate():
+#         return redirect(url_for('main.explore'))
+#     page = request.args.get('page', 1, type=int)
+#     posts, total = Post.search(g.search_form.q.data, page, current_app.config['POST_PER_PAGE'])
+#     next_url = url_for('main.search', q=g.search_form.q.data, page=page + 1) \
+#         if total > page * current_app.config['POST_PER_PAGE'] else None
+#     prev_url = url_for('main.search', q=g.search_form.q.data, page=page - 1) \
+#         if page > 1 else None
+#     return render_template('search.pug', title='Search', posts=posts, next_url=next_url, prev_url=prev_url)
 
+@bp.route('/translate', methods=['POST'])
+@login_required
+def translate_text():
+    data = request.get_json()
+    return {'text': translate(data['text'],
+                              data['source_language'],
+                              data['dest_language'])}

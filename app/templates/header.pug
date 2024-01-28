@@ -1,25 +1,25 @@
 block mainmenu
   nav.navbar.navbar-expand-lg.bg-body-tertiary 
-    div.container
-      a.navbar-brand(aria-current="page" href="{{ url_for('main.index') }}") Site-flask
+    .container
+      a.navbar-brand(aria-current="page" href= url_for('main.index'))= _('Site-flask')
       button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
         span.navbar-toggler-icon 
-      div.collapse.navbar-collapse(id="navbarSupportedContent")
+      .collapse.navbar-collapse(id="navbarSupportedContent")
         ul.navbar-nav.me-auto.mb-2.mb-lg-0 
           li.nav-item
-            a.nav-link(aria-current="page" href="{{ url_for('main.index') }}") Home 
+            a.nav-link(aria-current="page" href= url_for('main.index'))= _('Home')
           li.nav-item
-            a.nav-link(href="{{ url_for('main.explore') }}") Explore 
-          if g.search_form 
-            form.navbar-form.navbar-left( method="get" action="{{ url_for('main.search') }}")
-              div.form-group 
-                {{ g.search_form.q(size=20, class='form-control', placeholder=g.search_form.q.label.text) }}
+            a.nav-link(href= url_for('main.explore'))= _('Explore')
+          //- if g.search_fo
+          //-   form.navbar-form.navbar-left( method="get" action="{{ url_for('main.search') }}")
+          //-     div.form-group 
+          //-       {{ g.search_form.q(size=20, class='form-control', placeholder=g.search_form.q.label.text) }}
         ul.navbar-nav.mb-2.mb-lg-0
-          if current_user.is_anonymous
+          -if current_user.is_anonymous
             li.nav-item
-              a.nav-link(aria-current="page" href="{{ url_for('auth.login') }}") Login
-          else 
+              a.nav-link(aria-current="page" href= url_for('auth.login'))= _('Login')
+          -else 
             li.nav-item
-              a.nav-link(aria-current="page" href="{{ url_for('main.user', username=current_user.username) }}") Profile 
+              a.nav-link(aria-current="page" href= url_for('main.user', username=current_user.username))= _('Profile')
             li.nav-item
-              a.nav-link(aria-current="page" href="{{ url_for('auth.logout') }}") Logout
+              a.nav-link(aria-current="page" href= url_for('auth.logout'))= _('Logout')

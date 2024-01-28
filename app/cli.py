@@ -1,10 +1,25 @@
 import os, click
-from app import app
+# from app import app
+from flask import Blueprint
 
-@app.cli.group()
+bp = Blueprint('cli', __name__, cli_group=None)
+
+# @app.cli.group()
+@bp.cli.group()
 def translate():
     """Translation and localization commands."""
     pass
+
+# подкоманда инициализации
+@translate.command()
+@click.argument('lang')
+def init(lang):
+    # initialize a new language
+    if os.system('pybabel extract -F babel.cfg -k _l -o messages.pot .'):
+        raise RuntimeError('extract command failed')
+    if os.system('pybabel init -i messages.pot -d app/translations -l' + lang):
+        raise RuntimeError('init command failed')
+    os.remove('messages.pot')
 
 # обновить и скомпилировать подкоманды
 @translate.command()
@@ -19,16 +34,7 @@ def update():
 @translate.command()
 def compile():
     # compile all languages
-    if os.system('pybabel compile -i messages.pot -d app/translations'):
+    if os.system('pybabel compile -d app/translations'):
         raise RuntimeError('compile command failed')
     
-# подкоманда инициализации
-@translate.command()
-@click.argument('lang')
-def init(lang):
-    # initialize a new language
-    if os.system('pybabel extract -F babel.cfg -k _l -o messages.pot .'):
-        raise RuntimeError('extract command failed')
-    if os.system('pybabel init -i messages.pot -d app/translations -l' + lang):
-        raise RuntimeError('init command failed')
-    os.remove('messages.pot')
+

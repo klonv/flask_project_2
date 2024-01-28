@@ -1,8 +1,32 @@
 extends base.pug
+-import 'bootstrap_wtf.html' as wtf 
 
 block content
-  h1 Hello, {{ current_user.username }}!
+  h1 = _('Hello, %(username)s!', username=current_user.username)
+  //- if form
+  //-   form(action="" method="post")
+  //-     {{ form.hidden_tag() }}
+  //-     p 
+  //-       {{ form.post.label }}
+  //-       {{ form.post(col=32, row=4) }}
+  //-       for error in form.post.errors
+  //-         span(style="color: red")
+  //-           [{{ error }}]
+  //-     p 
+  //-       {{ form.submit() }}
+  if form
+    {{ wtf.quick_form(form) }}
   for post in posts
-    div 
-      p {{ post.author.username }} says: 
-        {{ post.body }}
+    include _post.pug
+  nav(aria-label="Post navigation")
+    ul.pagination
+      li(class="page-item{% if not prev_url %} disabled{% endif %}")
+        a.page-link(href= prev_url )
+          span(aria-hidden="true")&larr;
+          = _('Never posts')
+      li(class="page-item{% if not next_url %} disabled{% endif %}")
+        a.page-link(href= next_url )
+          = _('Older posts')
+          span(aria-hidden="true")&rarr;
+
+

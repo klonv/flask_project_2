@@ -1,26 +1,11 @@
 extends base.pug
-import bootstrap_wtf.pug as wtf
+{% import 'bootstrap_wtf.html' as wtf %}
 
 block content 
-  h1 {{_('Sign In')}}
-  form(action="" method="post" novalidate) 
-    {{ form.hidden_tag() }}
-    p 
-      {{ form.username.label }}
-      {{ form.username(size=32) }}
-      for error in form.username.errors
-        span(style="color: red;")
-          [{{ error }}]
-    p 
-      {{ form.password.label }}
-      {{ form.password(size=32) }}
-      for error in form.password.errors
-        span(style="color: red;")
-          [{{ error }}]
-    p 
-      {{ form.remember_me() }} {{ form.remember_me.label }}
-    p 
-      {{ form.submit() }}
-  //- {{ wtf.quick_form(form) }}
-  p New User?
+  h1 {{ _('Sign In') }}
+
+  {{ wtf.quick_form(form) }}
+  p {{ _('New User?') }}
     a(href="{{ url_for('auth.register') }}") {{_('Click to Register')}}
+  p {{ _('forgot Your Password?') }}
+    a(href="{{ url_for('auth.reset_password_request') }}") {{ _('Click to Reset It') }}

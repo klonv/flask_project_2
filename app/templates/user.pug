@@ -1,35 +1,49 @@
 extends base.pug
 
 block content 
-  table
+  table.table-hover
     tr(valign="top")
-      td 
+      td(width="256px") 
         img(src="{{ user.avatar(128) }}")
       td 
-        h1 User: {{ user.username }}
+        h1 
+          = _('User')
+          |: 
+          = user.username
         if user.about_me 
           p 
-            {{ user.about_me }}
+            = user.about_me
+        if user.last_seen 
+          p 
+          = _('Last seen on')
+          |: 
+          = moment(user.last_seen).format('LLL')
+        //- p {{ _('%(count)d followers', count=user.followers_count()) }}, {{ _('%(count)d following', count=user.following_count) }}
+        <p>{{ _('%(count)d followers', count=user.followers_count()) }}, {{ _('%(count)d following', count=user.following_count()) }}</p>
         if user == current_user 
           p 
-            a(href="{{ url_for('main.edit_profile') }}") Edit your profile
+            a(href= url_for('main.edit_profile') ) 
+              = _('Edit your profile') 
         elif not current_user.is_following(user)
           p 
-            form(action="{{ url_for('main.follow', username=user.username) }}" method="post")
-              {{ form.hidden_tag() }}
-              {{ form.submit(value='Follow') }}
+            form(action="= url_for('main.follow', username=user.username) " method="post")
+              = form.hidden_tag() 
+              = form.submit(value=_('Follow'), class_='btn btn-primary') 
         else 
           p 
-            form(action="{{ url_for('main.unfollow', username=user.username) }}" method="post")
-              {{ form.hidden_tag() }}
-              {{ form.submit(value='Unfollow') }}
-        if user.last_seen 
-          p Last seen on:
-            {{ moment(user.last_seen).format('LLL') }}
+            form(action="= url_for('main.unfollow', username=user.username) " method="post")
+              = form.hidden_tag() 
+              = form.submit(value=_('Unfollow'), class_='btn btn-primary') 
   hr
   for post in posts 
     include _post.pug
-  if prev_url 
-    a(href="{{ prev_url }}") Never posts 
-  if next_url 
-    a(href="{{ next_url }}") Older posts
+  nav(aria-label="Post navigation")
+    ul.pagination 
+      li(class="page-item{% if not prev_url %} disabled{% endif%}") 
+        a.page-link(href= prev_url) 
+          span(aria-hidden="true")&larr;
+          = _('Never posts')
+      li(class="page-item {% if not next_url %} disabled{% endif%}") 
+        a.page-link(href= next_url) 
+          = _('Older posts')
+          span(aria-hidden="true")&rarr;
