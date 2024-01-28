@@ -1,0 +1,210 @@
+# Russian translations for PROJECT.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2024-01-27 22:31+0300\n"
+"PO-Revision-Date: 2024-01-27 20:34+0300\n"
+"Last-Translator: \n"
+"Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.14.0\n"
+
+#: app/__init__.py:27
+msgid "Please log in to access this page."
+msgstr "Пожалуйста, авторизуйтесь, чтобы получить доступ к этой странице."
+
+#: app/translate.py:8
+msgid "Error: the translation service is not configured."
+msgstr "Ошибка: служба перевода не настроена."
+
+#: app/translate.py:19
+msgid "Error: the translation service failed."
+msgstr "Ошибка: служба перевода не удалась."
+
+#: app/auth/email.py:8
+msgid "[Site_flask] Reset Your Password"
+msgstr "[Site_flask] Сбросить пароль"
+
+#: app/auth/forms.py:13 app/auth/forms.py:19 app/main/forms.py:14
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: app/auth/forms.py:14 app/auth/forms.py:21 app/auth/forms.py:41
+msgid "Password"
+msgstr "Пароль"
+
+#: app/auth/forms.py:15
+msgid "Remember Me"
+msgstr "Запомнить меня"
+
+#: app/auth/forms.py:16
+msgid "Sign In"
+msgstr "Войти"
+
+#: app/auth/forms.py:20
+msgid "Email"
+msgstr "Электронная почта"
+
+#: app/auth/forms.py:22 app/auth/forms.py:43
+msgid "Repeat Password"
+msgstr "Повторите пароль"
+
+#: app/auth/forms.py:23
+msgid "Register"
+msgstr "Регистрация"
+
+#: app/auth/forms.py:28
+msgid "Please use a different username."
+msgstr "Пожалуйста, используйте другое имя пользователя."
+
+#: app/auth/forms.py:33
+msgid "Please use a different email address."
+msgstr "Пожалуйста, используйте другой адрес электронной почты."
+
+#: app/auth/forms.py:45
+msgid "Request Password Reset"
+msgstr "Запросить сброс пароля"
+
+#: app/auth/routes.py:20
+msgid "Invalid username or password"
+msgstr "Неправильное имя пользователя или пароль"
+
+#: app/auth/routes.py:27
+msgid "Sign in"
+msgstr "Войти"
+
+#: app/auth/routes.py:59
+msgid "Check your email for the instructions to reset your password"
+msgstr ""
+"Проверьте свою электронную почту, чтобы получить инструкции по сбросу "
+"пароля"
+
+#: app/auth/routes.py:61
+msgid "Reset Password"
+msgstr "Сброс пароля"
+
+#: app/auth/routes.py:75
+msgid "Your password has been reset."
+msgstr "Ваш пароль был сброшен."
+
+#: app/main/forms.py:15
+msgid "About me"
+msgstr "Обо мне"
+
+#: app/main/forms.py:16 app/main/forms.py:36
+msgid "Submit"
+msgstr "Подтвердить"
+
+#: app/main/forms.py:35
+msgid "Ваше сообщение:"
+msgstr "Ваше сообщение:"
+
+#: app/main/forms.py:40
+msgid "Search"
+msgstr "Поиск"
+
+#: app/main/routes.py:36
+msgid "your post is now live!"
+msgstr "ваш пост теперь доступен!"
+
+#: app/main/routes.py:46
+msgid "Home"
+msgstr "Домой"
+
+#: app/main/routes.py:91
+msgid "Your changes have been saved."
+msgstr "Ваши изменения были сохранены."
+
+#: app/main/routes.py:96
+msgid "Edit Profile"
+msgstr "Редактировать профиль"
+
+#: app/main/routes.py:106
+#, python-format
+msgid "User %(username)s not found."
+msgstr "Пользователь %(username)s не найден."
+
+#: app/main/routes.py:109
+msgid "You cannot follow yourself!"
+msgstr "Вы не можете следовать за собой!"
+
+#: app/main/routes.py:113
+#, python-format
+msgid "You are following %(username)s!"
+msgstr "Вы подписаны на %(username)s!"
+
+#: app/main/routes.py:129
+msgid "You cannot unfollow yourself!"
+msgstr "Вы не можете следовать за собой!"
+
+#: app/main/routes.py:133
+#, python-format
+msgid "You are not following %(username)s."
+msgstr "Вы не можете следовать за %(username)s."
+
+#~ msgid "%(username)s said %(when)s"
+#~ msgstr "%(username)s сказал %(when)s"
+
+#~ msgid "Translate"
+#~ msgstr "Переводить"
+
+#~ msgid "Welcome to site Flask"
+#~ msgstr "Добро пожаловать на сайт Flask"
+
+#~ msgid "Hello, %(username)s!"
+#~ msgstr "Привет, %(username)s!"
+
+#~ msgid "New User?"
+#~ msgstr "Новый пользователь?"
+
+#~ msgid "Click to Register"
+#~ msgstr "Нажмите, чтобы зарегистрироваться"
+
+#~ msgid "forgot Your Password?"
+#~ msgstr "забыли пароль?"
+
+#~ msgid "Click to Reset It"
+#~ msgstr "Нажмите, чтобы сбросить его"
+
+#~ msgid "Reset Your Password"
+#~ msgstr "Сбросить пароль"
+
+#~ msgid "Dear"
+#~ msgstr "Дорогой"
+
+#~ msgid "To reset your password"
+#~ msgstr "Чтобы сбросить пароль"
+
+#~ msgid "click here"
+#~ msgstr "кликните сюда"
+
+#~ msgid ""
+#~ "Alternatively, you can paste the "
+#~ "following link in your browser&#39;s "
+#~ "address bar:"
+#~ msgstr ""
+#~ "Альтернативно вы можете вставить следующую "
+#~ "ссылку в адресную строку вашего "
+#~ "браузера:"
+
+#~ msgid "If you have not requested a password reset simply ignore this message."
+#~ msgstr ""
+#~ "Если вы не запрашивали сброс пароля, "
+#~ "просто проигнорируйте это сообщение."
+
+#~ msgid "Sincerely,"
+#~ msgstr "Искренне,"
+
+#~ msgid "The Site_flask Team"
+#~ msgstr "Команда Site_flask"
+
